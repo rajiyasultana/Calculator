@@ -19,22 +19,22 @@ class Program
 
         Console.WriteLine("Simple Console Calculator (+, -, *, /)");
         Console.Write("Enter first number: ");
-        double a = double.Parse(Console.ReadLine()!);
+        double a = double.Parse(Console.ReadLine());
 
         Console.Write("Enter operator: ");
-        string op = Console.ReadLine()!;
+        string op = Console.ReadLine();
 
         Console.Write("Enter second number: ");
-        double b = double.Parse(Console.ReadLine()!);
+        double b = double.Parse(Console.ReadLine());
 
         try
         {
             double result = calculator.Execute(op, a, b);
-            Console.WriteLine($"Result: {result}");
+            Console.WriteLine("Result: " + result);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");
+            Console.WriteLine("Error: " + ex.Message);
         }
     }
 }

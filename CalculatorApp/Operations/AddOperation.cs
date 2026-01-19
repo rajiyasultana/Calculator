@@ -1,4 +1,6 @@
 // CalculatorApp/Operations/AddOperation.cs
+using System;
+
 namespace CalculatorApp.Operations
 {
     public class AddOperation : IOperation
