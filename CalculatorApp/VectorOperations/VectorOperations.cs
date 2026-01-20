@@ -4,9 +4,10 @@ using CalculatorApp.Vectors;
 namespace CalculatorApp.VectorOperations
 {
     /// <summary>
-    /// Performs addition operation on two 2D vectors.
+    /// Performs addition operation on two generic 2D vectors.
     /// </summary>
-    public class Vector2DAddOperation : IVector2DOperation
+    /// <typeparam name="T">The numeric type for vector components.</typeparam>
+    public class Vector2DAddOperation<T> : IVector2DOperation<T> where T : struct
     {
         /// <summary>
         /// Adds two 2D vectors.
@@ -15,18 +16,23 @@ namespace CalculatorApp.VectorOperations
         /// <param name="b">The second vector.</param>
         /// <returns>The sum of the two vectors.</returns>
         /// <exception cref="ArgumentNullException">Thrown when either vector is null.</exception>
-        public Vector2D Calculate(Vector2D a, Vector2D b)
+        public Vector2D<T> Calculate(Vector2D<T> a, Vector2D<T> b)
         {
             if (a == null) throw new ArgumentNullException(nameof(a));
             if (b == null) throw new ArgumentNullException(nameof(b));
-            return new Vector2D(a.X + b.X, a.Y + b.Y);
+            dynamic x1 = a.X;
+            dynamic y1 = a.Y;
+            dynamic x2 = b.X;
+            dynamic y2 = b.Y;
+            return new Vector2D<T>((T)(x1 + x2), (T)(y1 + y2));
         }
     }
 
     /// <summary>
-    /// Performs subtraction operation on two 2D vectors.
+    /// Performs subtraction operation on two generic 2D vectors.
     /// </summary>
-    public class Vector2DSubtractOperation : IVector2DOperation
+    /// <typeparam name="T">The numeric type for vector components.</typeparam>
+    public class Vector2DSubtractOperation<T> : IVector2DOperation<T> where T : struct
     {
         /// <summary>
         /// Subtracts one 2D vector from another.
@@ -35,18 +41,23 @@ namespace CalculatorApp.VectorOperations
         /// <param name="b">The second vector (subtrahend).</param>
         /// <returns>The difference of the two vectors.</returns>
         /// <exception cref="ArgumentNullException">Thrown when either vector is null.</exception>
-        public Vector2D Calculate(Vector2D a, Vector2D b)
+        public Vector2D<T> Calculate(Vector2D<T> a, Vector2D<T> b)
         {
             if (a == null) throw new ArgumentNullException(nameof(a));
             if (b == null) throw new ArgumentNullException(nameof(b));
-            return new Vector2D(a.X - b.X, a.Y - b.Y);
+            dynamic x1 = a.X;
+            dynamic y1 = a.Y;
+            dynamic x2 = b.X;
+            dynamic y2 = b.Y;
+            return new Vector2D<T>((T)(x1 - x2), (T)(y1 - y2));
         }
     }
 
     /// <summary>
-    /// Performs addition operation on two 3D vectors.
+    /// Performs addition operation on two generic 3D vectors.
     /// </summary>
-    public class Vector3DAddOperation : IVector3DOperation
+    /// <typeparam name="T">The numeric type for vector components.</typeparam>
+    public class Vector3DAddOperation<T> : IVector3DOperation<T> where T : struct
     {
         /// <summary>
         /// Adds two 3D vectors.
@@ -55,18 +66,25 @@ namespace CalculatorApp.VectorOperations
         /// <param name="b">The second vector.</param>
         /// <returns>The sum of the two vectors.</returns>
         /// <exception cref="ArgumentNullException">Thrown when either vector is null.</exception>
-        public Vector3D Calculate(Vector3D a, Vector3D b)
+        public Vector3D<T> Calculate(Vector3D<T> a, Vector3D<T> b)
         {
             if (a == null) throw new ArgumentNullException(nameof(a));
             if (b == null) throw new ArgumentNullException(nameof(b));
-            return new Vector3D(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+            dynamic x1 = a.X;
+            dynamic y1 = a.Y;
+            dynamic z1 = a.Z;
+            dynamic x2 = b.X;
+            dynamic y2 = b.Y;
+            dynamic z2 = b.Z;
+            return new Vector3D<T>((T)(x1 + x2), (T)(y1 + y2), (T)(z1 + z2));
         }
     }
 
     /// <summary>
-    /// Performs subtraction operation on two 3D vectors.
+    /// Performs subtraction operation on two generic 3D vectors.
     /// </summary>
-    public class Vector3DSubtractOperation : IVector3DOperation
+    /// <typeparam name="T">The numeric type for vector components.</typeparam>
+    public class Vector3DSubtractOperation<T> : IVector3DOperation<T> where T : struct
     {
         /// <summary>
         /// Subtracts one 3D vector from another.
@@ -75,11 +93,17 @@ namespace CalculatorApp.VectorOperations
         /// <param name="b">The second vector (subtrahend).</param>
         /// <returns>The difference of the two vectors.</returns>
         /// <exception cref="ArgumentNullException">Thrown when either vector is null.</exception>
-        public Vector3D Calculate(Vector3D a, Vector3D b)
+        public Vector3D<T> Calculate(Vector3D<T> a, Vector3D<T> b)
         {
             if (a == null) throw new ArgumentNullException(nameof(a));
             if (b == null) throw new ArgumentNullException(nameof(b));
-            return new Vector3D(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
+            dynamic x1 = a.X;
+            dynamic y1 = a.Y;
+            dynamic z1 = a.Z;
+            dynamic x2 = b.X;
+            dynamic y2 = b.Y;
+            dynamic z2 = b.Z;
+            return new Vector3D<T>((T)(x1 - x2), (T)(y1 - y2), (T)(z1 - z2));
         }
     }
 }

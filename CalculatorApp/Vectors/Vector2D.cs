@@ -3,26 +3,27 @@ using System;
 namespace CalculatorApp.Vectors
 {
     /// <summary>
-    /// Represents a 2-dimensional vector with X and Y components.
+    /// Represents a 2-dimensional vector with X and Y components of type T.
     /// </summary>
-    public class Vector2D
+    /// <typeparam name="T">The numeric type for vector components.</typeparam>
+    public class Vector2D<T> where T : struct
     {
         /// <summary>
         /// Gets or sets the X component of the vector.
         /// </summary>
-        public double X { get; set; }
+        public T X { get; set; }
 
         /// <summary>
         /// Gets or sets the Y component of the vector.
         /// </summary>
-        public double Y { get; set; }
+        public T Y { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the Vector2D class.
         /// </summary>
         /// <param name="x">The X component (default: 0).</param>
         /// <param name="y">The Y component (default: 0).</param>
-        public Vector2D(double x = 0, double y = 0)
+        public Vector2D(T x = default(T), T y = default(T))
         {
             X = x;
             Y = y;
@@ -44,9 +45,9 @@ namespace CalculatorApp.Vectors
         /// <returns>True if the objects are equal; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is Vector2D)) return false;
-            Vector2D other = (Vector2D)obj;
-            return X == other.X && Y == other.Y;
+            if (!(obj is Vector2D<T>)) return false;
+            Vector2D<T> other = (Vector2D<T>)obj;
+            return X.Equals(other.X) && Y.Equals(other.Y);
         }
 
         /// <summary>
@@ -61,21 +62,27 @@ namespace CalculatorApp.Vectors
         /// <summary>
         /// Calculates the magnitude (length) of the vector.
         /// </summary>
-        /// <returns>The magnitude of the vector.</returns>
+        /// <returns>The magnitude of the vector as double.</returns>
         public double Magnitude()
         {
-            return Math.Sqrt(X * X + Y * Y);
+            dynamic x = X;
+            dynamic y = Y;
+            return Math.Sqrt(x * x + y * y);
         }
 
         /// <summary>
         /// Calculates the dot product of this vector with another vector.
         /// </summary>
         /// <param name="other">The other vector.</param>
-        /// <returns>The dot product.</returns>
-        public double DotProduct(Vector2D other)
+        /// <returns>The dot product as dynamic type.</returns>
+        public dynamic DotProduct(Vector2D<T> other)
         {
             if (other == null) throw new ArgumentNullException(nameof(other));
-            return X * other.X + Y * other.Y;
+            dynamic x1 = X;
+            dynamic y1 = Y;
+            dynamic x2 = other.X;
+            dynamic y2 = other.Y;
+            return x1 * x2 + y1 * y2;
         }
     }
 }

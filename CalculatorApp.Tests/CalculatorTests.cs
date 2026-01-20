@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using CalculatorApp;
+using CalculatorApp.Vectors;
+using CalculatorApp.VectorOperations;
 using System;
 
 namespace CalculatorApp.Tests
@@ -110,149 +112,151 @@ namespace CalculatorApp.Tests
     }
 
     /// <summary>
-    /// Unit tests for the UniversalCalculator that handles multiple data types.
+    /// Unit tests for generic Vector2D operations.
     /// </summary>
-    public class UniversalCalculatorTests
+    public class Vector2DTests
     {
         [Test]
-        public void Integer_Addition_ReturnsCorrectResult()
+        public void Vector2D_Integer_Add_ReturnsCorrectResult()
         {
-            int result = UniversalCalculator.Calculate("+", 5, 3);
-            Assert.AreEqual(8, result);
+            Vector2D<int> v1 = new Vector2D<int>(3, 4);
+            Vector2D<int> v2 = new Vector2D<int>(1, 2);
+            Vector2DAddOperation<int> addOp = new Vector2DAddOperation<int>();
+            Vector2D<int> result = addOp.Calculate(v1, v2);
+            Assert.AreEqual(4, result.X);
+            Assert.AreEqual(6, result.Y);
         }
 
         [Test]
-        public void Integer_Subtraction_ReturnsCorrectResult()
+        public void Vector2D_Double_Subtract_ReturnsCorrectResult()
         {
-            int result = UniversalCalculator.Calculate("-", 10, 4);
-            Assert.AreEqual(6, result);
+            Vector2D<double> v1 = new Vector2D<double>(5.0, 6.0);
+            Vector2D<double> v2 = new Vector2D<double>(2.0, 1.0);
+            Vector2DSubtractOperation<double> subtractOp = new Vector2DSubtractOperation<double>();
+            Vector2D<double> result = subtractOp.Calculate(v1, v2);
+            Assert.AreEqual(3.0, result.X);
+            Assert.AreEqual(5.0, result.Y);
         }
 
         [Test]
-        public void Integer_Multiplication_ReturnsCorrectResult()
+        public void Vector2D_Float_Magnitude_ReturnsCorrectResult()
         {
-            int result = UniversalCalculator.Calculate("*", 6, 7);
-            Assert.AreEqual(42, result);
+            Vector2D<float> v = new Vector2D<float>(3f, 4f);
+            double magnitude = v.Magnitude();
+            Assert.AreEqual(5.0, magnitude, 0.001);
         }
 
         [Test]
-        public void Integer_Division_ReturnsCorrectResult()
+        public void Vector2D_Integer_DotProduct_ReturnsCorrectResult()
         {
-            int result = UniversalCalculator.Calculate("/", 15, 3);
-            Assert.AreEqual(5, result);
+            Vector2D<int> v1 = new Vector2D<int>(1, 2);
+            Vector2D<int> v2 = new Vector2D<int>(3, 4);
+            dynamic dotProduct = v1.DotProduct(v2);
+            Assert.AreEqual(11, dotProduct);
         }
 
         [Test]
-        public void Integer_Modulo_ReturnsCorrectResult()
+        public void Vector2D_Decimal_Add_ReturnsCorrectResult()
         {
-            int result = UniversalCalculator.Calculate("%", 17, 5);
-            Assert.AreEqual(2, result);
+            Vector2D<decimal> v1 = new Vector2D<decimal>(1.5m, 2.5m);
+            Vector2D<decimal> v2 = new Vector2D<decimal>(0.5m, 0.5m);
+            Vector2DAddOperation<decimal> addOp = new Vector2DAddOperation<decimal>();
+            Vector2D<decimal> result = addOp.Calculate(v1, v2);
+            Assert.AreEqual(2.0m, result.X);
+            Assert.AreEqual(3.0m, result.Y);
         }
 
         [Test]
-        public void Integer_Power_ReturnsCorrectResult()
+        public void Vector2D_Long_Subtract_ReturnsCorrectResult()
         {
-            int result = UniversalCalculator.Calculate("^", 2, 8);
-            Assert.AreEqual(256, result);
+            Vector2D<long> v1 = new Vector2D<long>(1000L, 2000L);
+            Vector2D<long> v2 = new Vector2D<long>(500L, 1000L);
+            Vector2DSubtractOperation<long> subtractOp = new Vector2DSubtractOperation<long>();
+            Vector2D<long> result = subtractOp.Calculate(v1, v2);
+            Assert.AreEqual(500L, result.X);
+            Assert.AreEqual(1000L, result.Y);
         }
 
         [Test]
-        public void Float_Addition_ReturnsCorrectResult()
+        public void Vector2D_Equals_ReturnsTrueForSameValues()
         {
-            float result = UniversalCalculator.Calculate("+", 2.5f, 3.5f);
-            Assert.AreEqual(6.0f, result, 0.001f);
+            Vector2D<int> v1 = new Vector2D<int>(3, 4);
+            Vector2D<int> v2 = new Vector2D<int>(3, 4);
+            Assert.IsTrue(v1.Equals(v2));
         }
 
         [Test]
-        public void Float_Division_ReturnsCorrectResult()
+        public void Vector2D_Equals_ReturnsFalseForDifferentValues()
         {
-            float result = UniversalCalculator.Calculate("/", 10f, 4f);
-            Assert.AreEqual(2.5f, result, 0.001f);
+            Vector2D<int> v1 = new Vector2D<int>(3, 4);
+            Vector2D<int> v2 = new Vector2D<int>(5, 6);
+            Assert.IsFalse(v1.Equals(v2));
+        }
+    }
+
+    /// <summary>
+    /// Unit tests for generic Vector3D operations.
+    /// </summary>
+    public class Vector3DTests
+    {
+        [Test]
+        public void Vector3D_Integer_Add_ReturnsCorrectResult()
+        {
+            Vector3D<int> v1 = new Vector3D<int>(1, 2, 3);
+            Vector3D<int> v2 = new Vector3D<int>(4, 5, 6);
+            Vector3DAddOperation<int> addOp = new Vector3DAddOperation<int>();
+            Vector3D<int> result = addOp.Calculate(v1, v2);
+            Assert.AreEqual(5, result.X);
+            Assert.AreEqual(7, result.Y);
+            Assert.AreEqual(9, result.Z);
         }
 
         [Test]
-        public void Double_Addition_ReturnsCorrectResult()
+        public void Vector3D_Double_Subtract_ReturnsCorrectResult()
         {
-            double result = UniversalCalculator.Calculate("+", 2.5, 3.5);
-            Assert.AreEqual(6.0, result);
+            Vector3D<double> v1 = new Vector3D<double>(5.0, 6.0, 7.0);
+            Vector3D<double> v2 = new Vector3D<double>(1.0, 2.0, 3.0);
+            Vector3DSubtractOperation<double> subtractOp = new Vector3DSubtractOperation<double>();
+            Vector3D<double> result = subtractOp.Calculate(v1, v2);
+            Assert.AreEqual(4.0, result.X);
+            Assert.AreEqual(4.0, result.Y);
+            Assert.AreEqual(4.0, result.Z);
         }
 
         [Test]
-        public void Double_Power_ReturnsCorrectResult()
+        public void Vector3D_Float_Magnitude_ReturnsCorrectResult()
         {
-            double result = UniversalCalculator.Calculate("^", 2.0, 3.0);
-            Assert.AreEqual(8.0, result);
+            Vector3D<float> v = new Vector3D<float>(1f, 2f, 2f);
+            double magnitude = v.Magnitude();
+            Assert.AreEqual(3.0, magnitude, 0.001);
         }
 
         [Test]
-        public void Decimal_Addition_ReturnsCorrectResult()
+        public void Vector3D_Integer_DotProduct_ReturnsCorrectResult()
         {
-            decimal result = UniversalCalculator.Calculate("+", 10.5m, 5.5m);
-            Assert.AreEqual(16m, result);
+            Vector3D<int> v1 = new Vector3D<int>(1, 2, 3);
+            Vector3D<int> v2 = new Vector3D<int>(4, 5, 6);
+            dynamic dotProduct = v1.DotProduct(v2);
+            Assert.AreEqual(32, dotProduct);
         }
 
         [Test]
-        public void Decimal_Division_ReturnsCorrectResult()
+        public void Vector3D_Double_CrossProduct_ReturnsCorrectResult()
         {
-            decimal result = UniversalCalculator.Calculate("/", 10m, 4m);
-            Assert.AreEqual(2.5m, result);
+            Vector3D<double> v1 = new Vector3D<double>(1.0, 0.0, 0.0);
+            Vector3D<double> v2 = new Vector3D<double>(0.0, 1.0, 0.0);
+            Vector3D<double> result = v1.CrossProduct(v2);
+            Assert.AreEqual(0.0, result.X);
+            Assert.AreEqual(0.0, result.Y);
+            Assert.AreEqual(1.0, result.Z);
         }
 
         [Test]
-        public void Long_Multiplication_ReturnsCorrectResult()
+        public void Vector3D_Equals_ReturnsTrueForSameValues()
         {
-            long result = UniversalCalculator.Calculate("*", 1000000L, 2000000L);
-            Assert.AreEqual(2000000000000L, result);
-        }
-
-        [Test]
-        public void Long_Division_ReturnsCorrectResult()
-        {
-            long result = UniversalCalculator.Calculate("/", 1000000L, 1000L);
-            Assert.AreEqual(1000L, result);
-        }
-
-        [Test]
-        public void Integer_DivideByZero_ThrowsException()
-        {
-            Assert.Throws<DivideByZeroException>(() => UniversalCalculator.Calculate("/", 5, 0));
-        }
-
-        [Test]
-        public void Double_DivideByZero_ThrowsException()
-        {
-            Assert.Throws<DivideByZeroException>(() => UniversalCalculator.Calculate("/", 5.0, 0.0));
-        }
-
-        [Test]
-        public void Integer_ModuloByZero_ThrowsException()
-        {
-            Assert.Throws<DivideByZeroException>(() => UniversalCalculator.Calculate("%", 5, 0));
-        }
-
-        [Test]
-        public void Invalid_Operation_ThrowsException()
-        {
-            Assert.Throws<InvalidOperationException>(() => UniversalCalculator.Calculate("&", 5, 3));
-        }
-
-        [Test]
-        public void GetSupportedOperations_ForDecimal_ReturnsBasicOps()
-        {
-            string[] ops = UniversalCalculator.GetSupportedOperations("decimal");
-            Assert.AreEqual(4, ops.Length);
-            Assert.Contains("+", ops);
-            Assert.Contains("-", ops);
-            Assert.Contains("*", ops);
-            Assert.Contains("/", ops);
-        }
-
-        [Test]
-        public void GetSupportedOperations_ForInt_ReturnsAllOps()
-        {
-            string[] ops = UniversalCalculator.GetSupportedOperations("int");
-            Assert.AreEqual(6, ops.Length);
-            Assert.Contains("^", ops);
+            Vector3D<int> v1 = new Vector3D<int>(1, 2, 3);
+            Vector3D<int> v2 = new Vector3D<int>(1, 2, 3);
+            Assert.IsTrue(v1.Equals(v2));
         }
     }
 }
