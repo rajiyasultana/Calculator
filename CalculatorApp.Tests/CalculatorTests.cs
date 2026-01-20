@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace CalculatorApp.Tests
 {
+    /// <summary>
+    /// Unit tests for the Calculator class.
+    /// </summary>
     public class CalculatorTests
     {
         private Calculator _calculator;
@@ -24,61 +27,61 @@ namespace CalculatorApp.Tests
         }
 
         [Test]
-        public void AddOperation_Test()
+        public void AddOperation_WithPositiveNumbers_ReturnsCorrectResult()
         {
             double result = _calculator.Execute("+", 2, 3);
             Assert.AreEqual(5, result);
         }
 
         [Test]
-        public void SubtractOperation_Test()
+        public void SubtractOperation_WithPositiveNumbers_ReturnsCorrectResult()
         {
             double result = _calculator.Execute("-", 5, 3);
             Assert.AreEqual(2, result);
         }
 
         [Test]
-        public void MultiplyOperation_Test()
+        public void MultiplyOperation_WithPositiveNumbers_ReturnsCorrectResult()
         {
             double result = _calculator.Execute("*", 5, 3);
             Assert.AreEqual(15, result);
         }
 
         [Test]
-        public void DivideOperation_Test()
+        public void DivideOperation_WithPositiveNumbers_ReturnsCorrectResult()
         {
             double result = _calculator.Execute("/", 6, 3);
             Assert.AreEqual(2, result);
         }
 
         [Test]
-        public void DivideByZero_ShouldThrow()
+        public void DivideByZero_ThrowsDivideByZeroException()
         {
             Assert.Throws<DivideByZeroException>(() => _calculator.Execute("/", 5, 0));
         }
 
         [Test]
-        public void InvalidOperation_ShouldThrow()
+        public void InvalidOperation_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => _calculator.Execute("^", 2, 3));
         }
 
         [Test]
-        public void AddNegativeNumbers_Test()
+        public void AddOperation_WithNegativeNumbers_ReturnsCorrectResult()
         {
             double result = _calculator.Execute("+", -2, -3);
             Assert.AreEqual(-5, result);
         }
 
         [Test]
-        public void MultiplyByZero_Test()
+        public void MultiplyOperation_ByZero_ReturnsZero()
         {
             double result = _calculator.Execute("*", 5, 0);
             Assert.AreEqual(0, result);
         }
 
         [Test]
-        public void DecimalOperations_Test()
+        public void Operations_WithDecimalNumbers_ReturnsCorrectResult()
         {
             double result = _calculator.Execute("+", 2.5, 3.5);
             Assert.AreEqual(6.0, result);
