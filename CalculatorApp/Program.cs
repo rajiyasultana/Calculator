@@ -1,36 +1,42 @@
 using CalculatorApp;
-using CalculatorApp.Operations;
 using System;
-using System.Collections.Generic;
 
 class Program
 {
     static void Main()
     {
-        var operations = new List<IOperation>
-        {
-            new AddOperation(),
-            new SubtractOperation(),
-            new MultiplyOperation(),
-            new DivideOperation()
-        };
+        Console.WriteLine("Universal Console Calculator");
+        Console.WriteLine("Supports: int, float, double, decimal, long");
+        Console.WriteLine("Operations: +, -, *, /, %, ^ (where applicable)");
+        Console.WriteLine();
 
-        var calculator = new Calculator(operations);
-
-        Console.WriteLine("Simple Console Calculator (+, -, *, /)");
         Console.Write("Enter first number: ");
-        double a = double.Parse(Console.ReadLine());
+        string input1 = Console.ReadLine();
 
-        Console.Write("Enter operator: ");
+        Console.Write("Enter operator (+, -, *, /, %, ^): ");
         string op = Console.ReadLine();
 
         Console.Write("Enter second number: ");
-        double b = double.Parse(Console.ReadLine());
+        string input2 = Console.ReadLine();
 
         try
         {
-            double result = calculator.Execute(op, a, b);
-            Console.WriteLine("Result: " + result);
+            // Try as integer first
+            if (int.TryParse(input1, out int a) && int.TryParse(input2, out int b))
+            {
+                int result = UniversalCalculator.Calculate(op, a, b);
+                Console.WriteLine("Result (int): " + result);
+            }
+            // Try as double
+            else if (double.TryParse(input1, out double d1) && double.TryParse(input2, out double d2))
+            {
+                double result = UniversalCalculator.Calculate(op, d1, d2);
+                Console.WriteLine("Result (double): " + result);
+            }
+            else
+            {
+                Console.WriteLine("Invalid number format");
+            }
         }
         catch (Exception ex)
         {
